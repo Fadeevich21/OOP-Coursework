@@ -3,6 +3,7 @@
 #include "FightCreature.hpp"
 #include <string>
 
+
 class FightCreature;
 
 class FightCreatureCommand
@@ -21,7 +22,7 @@ private:
 	FightCreature* _fightCreature2;
 
 public:
-	FightCreatureCommandHit(FightCreature* lhs, FightCreature* rhs);
+	FightCreatureCommandHit(FightCreature* const lhs, FightCreature* const rhs);
 
 	std::string handle() const;
 	void execute();
@@ -33,7 +34,7 @@ private:
 	FightCreature* _fightCreature;
 
 public:
-	FightCreatureCommandSurrender(FightCreature* fightCreature);
+	FightCreatureCommandSurrender(FightCreature* const fightCreature);
 
 	std::string handle() const;
 	void execute();

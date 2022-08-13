@@ -13,7 +13,7 @@ private:
 	void preTuning();
 
 public:
-	Game();
+	Game() = default;
 
 	void start();
 };
@@ -31,5 +31,5 @@ private:
 public:
 	PreTuningGame() = default;
 
-	Fight* createFight();
+	Fight* createFight() const;
 };

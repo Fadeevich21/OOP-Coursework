@@ -1,6 +1,7 @@
 #include "FightCreatureCommand.hpp"
 
-FightCreatureCommandHit::FightCreatureCommandHit(FightCreature* lhs, FightCreature* rhs)
+
+FightCreatureCommandHit::FightCreatureCommandHit(FightCreature* const lhs, FightCreature* const rhs)
 	: _fightCreature1(lhs), _fightCreature2(rhs)
 {
 }
@@ -16,7 +17,8 @@ void FightCreatureCommandHit::execute()
 	this->_fightCreature2->haveDamage(damage);
 }
 
-FightCreatureCommandSurrender::FightCreatureCommandSurrender(FightCreature* fightCreature)
+
+FightCreatureCommandSurrender::FightCreatureCommandSurrender(FightCreature* const fightCreature)
 	: _fightCreature(fightCreature)
 {
 }

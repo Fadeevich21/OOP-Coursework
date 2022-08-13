@@ -4,7 +4,7 @@
 
 Damage GeneratorDamage::generate(const Range& rangeDamage) const
 {
-    GeneratorNumber generator;
+    const GeneratorNumber generator;
     const int value = generator.generate(rangeDamage);
 
     return Damage(value);

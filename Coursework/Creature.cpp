@@ -5,6 +5,17 @@ Creature::Creature(const Health& health, const Range& rangeDamage)
 {
 }
 
+void Creature::setName(const std::string& name)
+{
+	this->_name = name;
+}
+
+std::string Creature::getName() const
+{
+	return this->_name;
+}
+
+
 Health Creature::getHealth() const
 {
 	return this->_health;
@@ -21,18 +32,29 @@ Range Creature::getRangeDamage() const
 }
 
 
+bool isHealthLessMin(const Range& rangeHealth, const Health& health)
+{
+	return health.getValue() < rangeHealth.min;
+}
+
+bool isHealthGreatMax(const Range& rangeHealth, const Health& health)
+{
+	return health.getValue() > rangeHealth.max;
+}
+
 void Creature::prepareHealth()
 {
-	if (this->_health.getValue() < this->_rangeHealth.min)
+	if (isHealthLessMin(this->_rangeHealth, this->_health))
 	{
 		this->_health.setValue(this->_rangeHealth.min);
 	}
 
-	if (this->_health.getValue() > this->_rangeHealth.max)
+	if (isHealthGreatMax(this->_rangeHealth, this->_health))
 	{
 		this->_health.setValue(this->_rangeHealth.max);
 	}
 }
+
 
 void Creature::changeNumberOfHealth(const int value)
 {
@@ -40,10 +62,12 @@ void Creature::changeNumberOfHealth(const int value)
 	prepareHealth();
 }
 
+
 std::string Creature::getInfo() const
 {
 	std::string info;
-	info += "Health: " + std::to_string(this->_health.getValue()) + "hp";
+	info += "Name: " + getName() + '\n';
+	info += "Health: " + std::to_string(this->_health.getValue()) + " hp";
 
 	return info;
 }

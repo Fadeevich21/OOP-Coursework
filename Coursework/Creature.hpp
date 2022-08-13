@@ -11,12 +11,16 @@ private:
 	Health _health;
 	Range _rangeHealth;
 	Range _rangeDamage;
+	std::string _name;
 
 private:
 	void prepareHealth();
 
 public:
 	Creature(const Health& health, const Range& rangeDamage);
+
+	void setName(const std::string& name);
+	std::string getName() const;
 
 	Health getHealth() const;
 	Range getRangeHealth() const;

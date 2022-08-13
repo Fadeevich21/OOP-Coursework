@@ -3,19 +3,24 @@
 #include <vector>
 
 
-MenuCreatorA::MenuCreatorA(const Game game)
-    : _game(game)
+MenuCreatorA::MenuCreatorA(const Game& game)
+	: _game(game)
 {
 }
 
-Menu MenuCreatorA::createMenu()
+Menu MenuCreatorA::execute() const
 {
-    Menu menu;
-    std::vector<MenuCommand*> commands{new StartGameMenuCommand(this->_game), new ExitMenuCommand()};
-    for (size_t i = 0; i < commands.size(); i++)
-    {
-        menu.addCommand(commands[i]);
-    }
+	Menu menu;
+	const std::vector<MenuCommand*> commands =
+	{
+		new StartGameMenuCommand(this->_game),
+		new ExitMenuCommand()
+	};
 
-    return menu;
+	for (const auto command : commands)
+	{
+		menu.addCommand(command);
+	}
+
+	return menu;
 }

@@ -12,7 +12,7 @@ public:
 	Move(FightCreature* const fightCreature);
 
 	void setFightCreature(FightCreature* const fightCreature);
-	FightCreature* getFightCreature();
+	FightCreature* getFightCreature() const;
 
 	void execute();
 };

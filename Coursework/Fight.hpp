@@ -3,6 +3,7 @@
 #include "FightCreature.hpp"
 #include "Move.hpp"
 
+
 class Fight
 {
 public:

@@ -8,7 +8,7 @@ int main()
 	srand(time(nullptr));
 
 	MenuCreator* menuCreator = new MenuCreatorA(Game());
-	Menu menu = menuCreator->createMenu();
+	Menu menu = menuCreator->execute();
 	menu.action();
 
 	return 0;

@@ -7,7 +7,7 @@
 class MenuCreator
 {
 public:
-	virtual Menu createMenu() = 0;
+	virtual Menu execute() const = 0;
 };
 
 class MenuCreatorA : public MenuCreator
@@ -16,7 +16,7 @@ private:
 	Game _game;
 
 public:
-	MenuCreatorA(const Game game);
+	MenuCreatorA(const Game& game);
 
-	Menu createMenu();
+	Menu execute() const;
 };

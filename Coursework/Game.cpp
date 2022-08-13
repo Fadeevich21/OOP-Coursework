@@ -2,16 +2,13 @@
 #include "TypesFightCreature.hpp"
 #include "CreatorFightCreature.hpp"
 #include <Windows.h>
+#include <iostream>
 
 
 void Game::preTuning()
 {
-	PreTuningGame preTuningGame;
+	const PreTuningGame preTuningGame;
 	this->_fight = preTuningGame.createFight();
-}
-
-Game::Game()
-{
 }
 
 void Game::start()
@@ -20,6 +17,7 @@ void Game::start()
 	while (!this->_fight->isEndedFighting())
 	{
 		this->_fight->printInfo();
+		std::cout << '\n';
 		this->_fight->processMove();
 		system("cls");
 	}
@@ -27,9 +25,10 @@ void Game::start()
 	this->_fight->printResult();
 }
 
+
 FightCreature* PreTuningGame::createFightCreatureBot() const
 {
-	CreatorFightCreature* creator = new CreatorFightCreatureBot();
+	CreatorFightCreature* const creator = new CreatorFightCreatureBot();
 
 	return creator->execute();
 }
@@ -41,15 +40,16 @@ void PreTuningGame::addCommandsFightCreatureBot(FightCreature* const fightCreatu
 	{
 		new FightCreatureCommandHit(fightCreature1, fightCreature2)
 	};
-	for (auto command : commands)
+	for (const auto command : commands)
 	{
 		fightCreature1->addCommand(command);
 	}
 }
 
+
 FightCreature* PreTuningGame::createFightCreaturePlayer() const
 {
-	CreatorFightCreature* creator = new CreatorFightCreaturePlayer();
+	CreatorFightCreature* const creator = new CreatorFightCreaturePlayer();
 
 	return creator->execute();
 }
@@ -62,16 +62,17 @@ void PreTuningGame::addCommandsFightCreaturePlayer(FightCreature* const fightCre
 		new FightCreatureCommandHit(fightCreature1, fightCreature2),
 		new FightCreatureCommandSurrender(fightCreature1)
 	};
-	for (auto command : commands)
+	for (const auto command : commands)
 	{
 		fightCreature1->addCommand(command);
 	}
 }
 
-Fight* PreTuningGame::createFight()
+
+Fight* PreTuningGame::createFight() const
 {
-	FightCreature* fightCreature1 = createFightCreaturePlayer();
-	FightCreature* fightCreature2 = createFightCreatureBot();
+	FightCreature* const fightCreature1 = createFightCreaturePlayer();
+	FightCreature* const fightCreature2 = createFightCreatureBot();
 	addCommandsFightCreaturePlayer(fightCreature1, fightCreature2);
 	addCommandsFightCreatureBot(fightCreature2, fightCreature1);
 

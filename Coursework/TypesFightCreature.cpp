@@ -7,23 +7,19 @@ int FightCreatureBot::getSlot() const
 {
 	const int min = 0;
 	const int max = this->_commands.size() - 1;
-	Range rangeSlots(min, max);
+	const Range rangeSlots(min, max);
 
-	GeneratorNumber generator;
+	const GeneratorNumber generator;
 	const int slot = generator.generate(rangeSlots);
 	
 	return slot;
-}
-
-std::string FightCreatureBot::handle() const
-{
-	return "Bot";
 }
 
 FightCreatureBot::FightCreatureBot(const Creature& creature)
 	: FightCreature(creature)
 {
 }
+
 
 int FightCreaturePlayer::getSlot() const
 {
@@ -38,11 +34,6 @@ int FightCreaturePlayer::getSlot() const
 	while (slot >= this->_commands.size());
 
 	return slot;
-}
-
-std::string FightCreaturePlayer::handle() const
-{
-	return "Player";
 }
 
 FightCreaturePlayer::FightCreaturePlayer(const Creature& creature)

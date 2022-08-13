@@ -5,6 +5,7 @@
 #include "Damage.hpp"
 #include <vector>
 
+
 class FightCreatureCommand;
 
 class FightCreature
@@ -27,7 +28,6 @@ private:
 
 protected:
 	virtual int getSlot() const = 0;
-	virtual std::string handle() const = 0;
 
 public:
 	FightCreature(const Creature& creature);

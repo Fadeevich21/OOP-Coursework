@@ -8,6 +8,5 @@ class GeneratorNumber
 public:
 	GeneratorNumber() = default;
 
-	int generate(const Range& rangeValues);
+	int generate(const Range& rangeValues) const;
 };
-

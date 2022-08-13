@@ -2,54 +2,47 @@
 #include <iostream>
 
 
+void processGameStateTwoFightCreatures(FightCreature* const lhs, FightCreature* const rhs)
+{
+	switch (lhs->getState())
+	{
+		case FightCreature::FightCreatureState::LOSE:
+			rhs->setState(FightCreature::FightCreatureState::WIN);
+			break;
+
+		case FightCreature::FightCreatureState::WIN:
+			rhs->setState(FightCreature::FightCreatureState::LOSE);
+			break;
+
+		default:
+			break;
+	}
+}
+
+bool isGameOver(FightCreature* const lhs, FightCreature* const rhs)
+{
+	return (lhs ->getState() != FightCreature::FightCreatureState::NONE ||
+			rhs->getState() != FightCreature::FightCreatureState::NONE);
+}
+
 void Fight::processGameState()
 {
 	this->_fightCreature1->processState();
 	this->_fightCreature2->processState();
-	if (this->_fightCreature1->getState() != FightCreature::FightCreatureState::NONE)
-	{
-		switch (this->_fightCreature1->getState())
-		{
-			case FightCreature::FightCreatureState::LOSE:
-				this->_fightCreature2->setState(FightCreature::FightCreatureState::WIN);
-				break;
 
-			case FightCreature::FightCreatureState::WIN:
-				this->_fightCreature2->setState(FightCreature::FightCreatureState::LOSE);
-				break;
+	processGameStateTwoFightCreatures(this->_fightCreature1, this->_fightCreature2);
+	processGameStateTwoFightCreatures(this->_fightCreature2, this->_fightCreature1);
 
-			default:
-				break;
-		}
-	}
-
-	if (this->_fightCreature2->getState() != FightCreature::FightCreatureState::NONE)
-	{
-		switch (this->_fightCreature2->getState())
-		{
-			case FightCreature::FightCreatureState::LOSE:
-				this->_fightCreature1->setState(FightCreature::FightCreatureState::WIN);
-				break;
-
-			case FightCreature::FightCreatureState::WIN:
-				this->_fightCreature1->setState(FightCreature::FightCreatureState::LOSE);
-				break;
-
-			default:
-				break;
-		}
-	}
-
-	if (this->_fightCreature1->getState() != FightCreature::FightCreatureState::NONE ||
-		this->_fightCreature2->getState() != FightCreature::FightCreatureState::NONE)
+	if (isGameOver(this->_fightCreature2, this->_fightCreature1))
 	{
 		this->_gameState = GameState::IS_OVER_GAME;
 	}
 }
 
+
 void Fight::changeFightCreatureMove()
 {
-	FightCreature* fightCreature = this->_move.getFightCreature();
+	FightCreature* const fightCreature = this->_move.getFightCreature();
 	if (fightCreature == this->_fightCreature1)
 	{
 		this->_move.setFightCreature(this->_fightCreature2);
@@ -60,20 +53,24 @@ void Fight::changeFightCreatureMove()
 	}
 }
 
+
 Fight::Fight(FightCreature* const lhs, FightCreature* const rhs)
 	: _fightCreature1(lhs), _fightCreature2(rhs), _move(_fightCreature1)
 {
 }
+
 
 void Fight::setGameState(const GameState& gameState)
 {
 	this->_gameState = gameState;
 }
 
+
 bool Fight::isEndedFighting() const
 {
 	return this->_gameState == GameState::IS_OVER_GAME;
 }
+
 
 void Fight::processMove()
 {
@@ -82,40 +79,48 @@ void Fight::processMove()
 	this->processGameState();
 }
 
+
 void Fight::printInfo() const
 {
-	std::cout << "Creature1: ";
 	this->_fightCreature1->printInfo();
 	std::cout << "\n";
 
-	std::cout << "Creature2: ";
 	this->_fightCreature2->printInfo();
 	std::cout << "\n";
 }
 
-void printResultFightCreature(FightCreature* fightCreature)
+
+std::string getStringState(const FightCreature::FightCreatureState& state)
 {
-	FightCreature::FightCreatureState state = fightCreature->getState();
-	fightCreature->printInfo();
-	std::cout << "Status: ";
+	std::string stringState;
 	switch (state)
 	{
 		case FightCreature::FightCreatureState::LOSE:
-			std::cout << "Lose\n";
+			stringState = "Lose";
 			break;
 
 		case FightCreature::FightCreatureState::WIN:
-			std::cout << "Win\n";
-			break;
-
-		default:
+			stringState = "Win";
 			break;
 	}
+
+	return stringState;
+}
+
+void printResultFightCreature(FightCreature* fightCreature)
+{
+	const FightCreature::FightCreatureState state = fightCreature->getState();
+	std::string stringState = getStringState(state);
+
+	fightCreature->printInfo();
+	std::cout << "Status: " << stringState << '\n';
 }
 
 void Fight::printResult() const
 {
 	printResultFightCreature(this->_fightCreature1);
 	std::cout << '\n';
+
 	printResultFightCreature(this->_fightCreature2);
+	std::cout << '\n';
 }
