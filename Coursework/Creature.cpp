@@ -1,7 +1,9 @@
 #include "Creature.hpp"
+#include "GeneratorDamage.hpp"
 
-Creature::Creature(const Health& health, const Range& rangeDamage)
-	: _health(health), _rangeDamage(rangeDamage), _rangeHealth(0, health.getValue())
+
+Creature::Creature(const CreatureHealthInfo& healthInfo, const CreatureDamageInfo& damageInfo)
+	: _healthInfo(healthInfo), _damageInfo(damageInfo)
 {
 }
 
@@ -16,50 +18,29 @@ std::string Creature::getName() const
 }
 
 
-Health Creature::getHealth() const
-{
-	return this->_health;
-}
-
-Range Creature::getRangeHealth() const
-{
-	return this->_rangeHealth;
-}
-
-Range Creature::getRangeDamage() const
-{
-	return this->_rangeDamage;
-}
-
-
-bool isHealthLessMin(const Range& rangeHealth, const Health& health)
-{
-	return health.getValue() < rangeHealth.min;
-}
-
-bool isHealthGreatMax(const Range& rangeHealth, const Health& health)
-{
-	return health.getValue() > rangeHealth.max;
-}
-
-void Creature::prepareHealth()
-{
-	if (isHealthLessMin(this->_rangeHealth, this->_health))
-	{
-		this->_health.setValue(this->_rangeHealth.min);
-	}
-
-	if (isHealthGreatMax(this->_rangeHealth, this->_health))
-	{
-		this->_health.setValue(this->_rangeHealth.max);
-	}
-}
-
-
 void Creature::changeNumberOfHealth(const int value)
 {
-	this->_health.change(value);
-	prepareHealth();
+	this->_healthInfo.changeValue(value);
+}
+
+
+Damage Creature::getDamage() const
+{
+	const GeneratorDamage generator;
+	const Range rangeDamage = this->_damageInfo.getRange();
+	const Damage damage = generator.execute(rangeDamage);
+
+	return damage;
+}
+
+int Creature::getHealthValue() const
+{
+	return this->_healthInfo.getValue();
+}
+
+Range Creature::getHealthRange() const
+{
+	return this->_healthInfo.getRange();
 }
 
 
@@ -67,7 +48,7 @@ std::string Creature::getInfo() const
 {
 	std::string info;
 	info += "Name: " + getName() + '\n';
-	info += "Health: " + std::to_string(this->_health.getValue()) + " hp";
+	info += "Health: " + std::to_string(this->_healthInfo.getValue()) + " hp";
 
 	return info;
 }

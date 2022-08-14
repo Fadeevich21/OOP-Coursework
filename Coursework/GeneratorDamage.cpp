@@ -2,10 +2,10 @@
 #include "GeneratorNumber.hpp"
 
 
-Damage GeneratorDamage::generate(const Range& rangeDamage) const
+Damage GeneratorDamage::execute(const Range& rangeDamage) const
 {
     const GeneratorNumber generator;
-    const int value = generator.generate(rangeDamage);
+    const int value = generator.execute(rangeDamage);
 
     return Damage(value);
 }

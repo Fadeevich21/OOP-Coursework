@@ -1,11 +1,17 @@
 #include "GeneratorCreature.hpp"
 #include "GeneratorHealth.hpp"
+#include "CreatureHealthInfo.hpp"
+#include "CreatureDamageInfo.hpp"
 
 
-Creature GeneratorCreature::generate(const Range& rangeHealth, const Range& rangeDamage) const
+Creature GeneratorCreature::execute(const Range& rangeHealthMaxValue, const Range& rangeDamage) const
 {
     const GeneratorHealth generator;
-    const Health health = generator.generate(rangeHealth);
+    const Health health = generator.execute(rangeHealthMaxValue);
+    const Range rangeHealth = Range(0, health.getValue());
 
-    return Creature(health, rangeDamage);
+    const CreatureHealthInfo healthInfo(health, rangeHealth);
+    const CreatureDamageInfo damageInfo(rangeDamage);
+
+    return Creature(healthInfo, damageInfo);
 }

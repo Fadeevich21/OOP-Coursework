@@ -11,5 +11,7 @@ int main()
 	Menu menu = menuCreator->execute();
 	menu.action();
 
+	system("pause");
+	
 	return 0;
 }

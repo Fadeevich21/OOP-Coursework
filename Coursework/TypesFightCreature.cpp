@@ -1,16 +1,16 @@
 #include "TypesFightCreature.hpp"
 #include "GeneratorNumber.hpp"
 #include <iostream>
+#include <algorithm>
 
 
 int FightCreatureBot::getSlot() const
 {
 	const int min = 0;
-	const int max = this->_commands.size() - 1;
-	const Range rangeSlots(min, max);
+	const int max = std::max(int(this->_commands.size()) - 1, 0);
 
 	const GeneratorNumber generator;
-	const int slot = generator.generate(rangeSlots);
+	const int slot = generator.execute(min, max);
 	
 	return slot;
 }
@@ -23,7 +23,7 @@ FightCreatureBot::FightCreatureBot(const Creature& creature)
 
 int FightCreaturePlayer::getSlot() const
 {
-	size_t slot;
+	int slot;
 	do
 	{
 		std::cout << "Select command:\n";

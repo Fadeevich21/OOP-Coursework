@@ -26,15 +26,16 @@ void Game::start()
 }
 
 
-FightCreature* PreTuningGame::createFightCreatureBot() const
+
+FightCreature* createFightCreatureBot() 
 {
 	CreatorFightCreature* const creator = new CreatorFightCreatureBot();
 
 	return creator->execute();
 }
 
-void PreTuningGame::addCommandsFightCreatureBot(FightCreature* const fightCreature1,
-												FightCreature* const fightCreature2) const
+void addCommandsFightCreatureBot(FightCreature* const fightCreature1,
+												FightCreature* const fightCreature2) 
 {
 	const std::vector<FightCreatureCommand*> commands =
 	{
@@ -47,15 +48,15 @@ void PreTuningGame::addCommandsFightCreatureBot(FightCreature* const fightCreatu
 }
 
 
-FightCreature* PreTuningGame::createFightCreaturePlayer() const
+FightCreature* createFightCreaturePlayer() 
 {
 	CreatorFightCreature* const creator = new CreatorFightCreaturePlayer();
 
 	return creator->execute();
 }
 
-void PreTuningGame::addCommandsFightCreaturePlayer(FightCreature* const fightCreature1,
-												   FightCreature* const fightCreature2) const
+void addCommandsFightCreaturePlayer(FightCreature* const fightCreature1,
+												   FightCreature* const fightCreature2) 
 {
 	const std::vector<FightCreatureCommand*> commands =
 	{

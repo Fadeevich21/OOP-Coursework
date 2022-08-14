@@ -9,6 +9,6 @@ class GeneratorHealth
 public:
 	GeneratorHealth() = default;
 
-	Health generate(const Range& rangeHealth) const;
+	Health execute(const Range& rangeHealth) const;
 };
 

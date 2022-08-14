@@ -21,13 +21,6 @@ public:
 
 class PreTuningGame
 {
-private:
-	FightCreature* createFightCreatureBot() const;
-	void addCommandsFightCreatureBot(FightCreature* const fightCreature1, FightCreature* const fightCreature2) const;
-
-	FightCreature* createFightCreaturePlayer() const;
-	void addCommandsFightCreaturePlayer(FightCreature* const fightCreature1, FightCreature* const fightCreature2) const;
-
 public:
 	PreTuningGame() = default;
 

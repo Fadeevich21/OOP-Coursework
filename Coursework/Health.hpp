@@ -10,6 +10,4 @@ public:
 	
 	void setValue(const int value);
 	int getValue() const;
-
-	void change(const int value);
 };

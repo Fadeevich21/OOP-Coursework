@@ -9,6 +9,6 @@ class GeneratorCreature
 public:
 	GeneratorCreature() = default;
 
-	Creature generate(const Range& rangeHealth, const Range& rangeDamage) const;
+	Creature execute(const Range& rangeHealthMaxValue, const Range& rangeDamage) const;
 };
 

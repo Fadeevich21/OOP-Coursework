@@ -10,7 +10,7 @@ void Menu::addCommand(MenuCommand* const command)
 
 void Menu::printCommands() const
 {
-	for (size_t i = 0; i < this->_commands.size(); i++)
+	for (int i = 0; i < this->_commands.size(); i++)
 	{
 		std::cout << i << ") " << this->_commands[i]->handle() << ";\n";
 	}
@@ -18,7 +18,7 @@ void Menu::printCommands() const
 
 void Menu::action()
 {
-	size_t slot;
+	int slot;
 	do
 	{
 		std::cout << "Select command:\n";

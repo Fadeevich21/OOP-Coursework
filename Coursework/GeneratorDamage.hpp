@@ -9,6 +9,6 @@ class GeneratorDamage
 public:
 	GeneratorDamage() = default;
 
-	Damage generate(const Range& rangeDamage) const;
+	Damage execute(const Range& rangeDamage) const;
 };
 

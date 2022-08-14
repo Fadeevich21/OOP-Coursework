@@ -8,5 +8,6 @@ class GeneratorNumber
 public:
 	GeneratorNumber() = default;
 
-	int generate(const Range& rangeValues) const;
+	int execute(const Range& rangeValues) const;
+	int execute(const int min, const int max) const;
 };

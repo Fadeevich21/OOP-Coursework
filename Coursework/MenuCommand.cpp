@@ -1,17 +1,17 @@
 #include "MenuCommand.hpp"
 
 
-StartGameMenuCommand::StartGameMenuCommand(const Game& game)
+MenuCommandStartGame::MenuCommandStartGame(const Game& game)
 	: _game(game)
 {
 }
 
-void StartGameMenuCommand::execute()
+void MenuCommandStartGame::execute()
 {
 	this->_game.start();
 }
 
-std::string StartGameMenuCommand::handle() const
+std::string MenuCommandStartGame::handle() const
 {
 	return "Start game";
 }
@@ -19,11 +19,11 @@ std::string StartGameMenuCommand::handle() const
 
 #include <Windows.h>
 
-std::string ExitMenuCommand::handle() const
+std::string MenuCommandExit::handle() const
 {
 	return "Exit";
 }
 
-void ExitMenuCommand::execute()
+void MenuCommandExit::execute()
 {
 }

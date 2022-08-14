@@ -13,8 +13,8 @@ Menu MenuCreatorA::execute() const
 	Menu menu;
 	const std::vector<MenuCommand*> commands =
 	{
-		new StartGameMenuCommand(this->_game),
-		new ExitMenuCommand()
+		new MenuCommandStartGame(this->_game),
+		new MenuCommandExit()
 	};
 
 	for (const auto command : commands)

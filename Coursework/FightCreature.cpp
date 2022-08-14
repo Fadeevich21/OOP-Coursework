@@ -17,7 +17,7 @@ FightCreature::FightCreature(const Creature& creature)
 
 void FightCreature::processState()
 {
-	if (this->_creature.getHealth().getValue() == this->_creature.getRangeHealth().min)
+	if (this->_creature.getHealthValue() == this->_creature.getHealthRange().min)
 	{
 		setState(FightCreatureState::LOSE);
 	}
@@ -41,7 +41,7 @@ void FightCreature::addCommand(FightCreatureCommand* const command)
 
 void FightCreature::printCommands() const
 {
-	for (size_t i = 0; i < this->_commands.size(); i++)
+	for (int i = 0; i < this->_commands.size(); i++)
 	{
 		std::cout << i << ") " << this->_commands[i]->handle() << ";\n";
 	}
@@ -50,10 +50,7 @@ void FightCreature::printCommands() const
 
 Damage FightCreature::getDamage() const
 {
-	const GeneratorDamage generator;
-	const Damage damage = generator.generate(this->_creature.getRangeDamage());
-
-	return damage;
+	return this->_creature.getDamage();
 }
 
 void FightCreature::haveDamage(const Damage& damage)

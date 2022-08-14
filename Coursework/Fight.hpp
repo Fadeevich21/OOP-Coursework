@@ -22,10 +22,10 @@ private:
 public:
 	Fight(FightCreature* const lhs, FightCreature* const rhs);
 
-	bool isEndedFighting() const;
-
 	void setGameState(const GameState& gameState);
 	void processGameState();
+
+	bool isEndedFighting() const;
 	
 	void changeFightCreatureMove();
 	void processMove();

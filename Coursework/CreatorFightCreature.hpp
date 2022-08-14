@@ -6,7 +6,7 @@
 class CreatorFightCreature
 {
 protected:
-	static const Range _rangeHealth;
+	static const Range _rangeHealthMaxValue;
 	static const Range _rangeDamage;
 
 public:

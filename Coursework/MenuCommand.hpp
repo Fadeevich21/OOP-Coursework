@@ -7,28 +7,27 @@
 class MenuCommand
 {
 public:
-	virtual void execute() = 0;
-
 	virtual std::string handle() const = 0;
+	virtual void execute() = 0;
 };
 
 
-class StartGameMenuCommand : public MenuCommand
+class MenuCommandStartGame : public MenuCommand
 {
 private:
 	Game _game;
 
 public:
-	StartGameMenuCommand(const Game& game);
+	MenuCommandStartGame(const Game& game);
 
 	std::string handle() const;
 	void execute();
 };
 
-class ExitMenuCommand : public MenuCommand
+class MenuCommandExit : public MenuCommand
 {
 public:
-	ExitMenuCommand() = default;
+	MenuCommandExit() = default;
 
 	std::string handle() const;
 	void execute();

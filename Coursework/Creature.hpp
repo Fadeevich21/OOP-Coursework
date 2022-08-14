@@ -1,32 +1,29 @@
 #pragma once
 
-#include "Health.hpp"
-#include "Range.hpp"
+#include "CreatureHealthInfo.hpp"
+#include "CreatureDamageInfo.hpp"
+#include "Damage.hpp"
 #include <string>
 
 
 class Creature
 {
 private:
-	Health _health;
-	Range _rangeHealth;
-	Range _rangeDamage;
 	std::string _name;
-
-private:
-	void prepareHealth();
+	CreatureHealthInfo _healthInfo;
+	CreatureDamageInfo _damageInfo;
 
 public:
-	Creature(const Health& health, const Range& rangeDamage);
+	Creature(const CreatureHealthInfo& healthInfo, const CreatureDamageInfo& damageInfo);
 
 	void setName(const std::string& name);
 	std::string getName() const;
 
-	Health getHealth() const;
-	Range getRangeHealth() const;
-	Range getRangeDamage() const;
-
 	void changeNumberOfHealth(const int value);
+
+	Damage getDamage() const;
+	int getHealthValue() const;
+	Range getHealthRange() const;
 
 	std::string getInfo() const;
 };

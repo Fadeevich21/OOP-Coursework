@@ -10,6 +10,7 @@ public:
 	virtual Menu execute() const = 0;
 };
 
+
 class MenuCreatorA : public MenuCreator
 {
 private:
